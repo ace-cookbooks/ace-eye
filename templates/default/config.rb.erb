@@ -1,8 +1,14 @@
+<% node['eye']['require'].each do |r| -%>
+require <%= r %>
+<% end -%>
+
 Eye.config do
   logger '<%= @log_file %>'
   <% node['eye']['global'].each do |k,v| -%>
     <% if k == 'contacts' -%>
-<%= "#{k}(*#{v})" %>
+      <% v.each do |contact, opts| -%>
+<%= "contact(#{contact}, *#{opts})" %>
+      <% end -%>
     <% else -%>
 <%= "#{k}(#{v})" %>
     <% end -%>
