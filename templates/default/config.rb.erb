@@ -12,7 +12,7 @@ Eye.config do
     <% end -%>
     <% if k == 'contacts' -%>
       <% values.each do |contact, opts| -%>
-        <% opts.first = opts.first.to_sym -%>
+        <% opts[0] = opts[0].to_sym -%>
 <%= "contact(#{contact}, *#{opts})" %>
       <% end -%>
     <% else -%>
