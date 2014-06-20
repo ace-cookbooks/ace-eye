@@ -1,12 +1,17 @@
 <% node['eye']['require'].each do |r| -%>
-require <%= r %>
+require '<%= r %>'
 <% end -%>
 
 Eye.config do
   logger '<%= @log_file %>'
+  <%# spaghetti code ... %>
   <% node['eye']['global'].each do |k,v| -%>
+    <% v.keys.each do |key| -%>
+      <% v[(key.to_sym rescue key) || key] = v.delete(key) -%>
+    <% end -%>
     <% if k == 'contacts' -%>
       <% v.each do |contact, opts| -%>
+        <% opts.first = opts.first.to_sym -%>
 <%= "contact(#{contact}, *#{opts})" %>
       <% end -%>
     <% else -%>
