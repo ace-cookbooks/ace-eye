@@ -6,7 +6,7 @@ Eye.config do
   logger '<%= @log_file %>'
   <%# spaghetti code ... %>
   <% node['eye']['global'].each do |k,v| -%>
-    values = v.dup
+    <% values = v.dup -%>
     <% values.keys.each do |key| -%>
       <% values[(key.to_sym rescue key) || key] = values.delete(key) -%>
     <% end -%>
