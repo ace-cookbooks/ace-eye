@@ -1,0 +1,10 @@
+Eye.config do
+  logger '<%= @log_file %>'
+  <% node['eye']['global'].each do |k,v| -%>
+    <% if k == 'contacts' -%>
+<%= "#{k}(*#{v})" %>
+    <% else -%>
+<%= "#{k}(#{v})" %>
+    <% end -%>
+  <% end -%>
+end
