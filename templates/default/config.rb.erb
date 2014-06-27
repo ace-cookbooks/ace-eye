@@ -4,19 +4,7 @@ require '<%= r %>'
 
 Eye.config do
   logger '<%= @log_file %>'
-  <%# spaghetti code ... %>
-  <% node['eye']['global'].each do |k,v| -%>
-    <% values = v.dup -%>
-    <% values.keys.each do |key| -%>
-      <% values[(key.to_sym rescue key) || key] = values.delete(key) -%>
-    <% end -%>
-    <% if k == 'contacts' -%>
-      <% values.each do |contact, opts| -%>
-        <% opts[0] = opts[0].to_sym -%>
-<%= "contact(#{contact}, *#{opts})" %>
-      <% end -%>
-    <% else -%>
-<%= "#{k}(#{values})" %>
-    <% end -%>
+  <% node['eye']['global'].each do |line| -%>
+  <%= line %>
   <% end -%>
 end
